@@ -1,0 +1,27 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px;
+    background-color: orange;
+}
+
+.header img{
+    height: 30px;
+    width: 30px;
+    background-color: white;
+    border-radius: 30px;
+    margin: 0 5px;
+}
+
+.header img:active{
+    background-color: green;
+}
+
+.header a{
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 20px;
+    color: #fff;
+    font-weight: bolder;
+}
