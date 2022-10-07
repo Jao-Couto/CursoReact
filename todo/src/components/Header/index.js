@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
-import Modal from '../Modal';
+import React from 'react';
 import './Header.css'
 
-function Header() {
-    const [dropdown, setDropdown] = useState("");
+function Header(props) {
 
     const showDropdown = () => {
-        setDropdown("show");
+        props.setDropdown("show");
+        console.log("show");
         document.body.style.backgroundColor = "rgba(0,0,0,0.5)"
     }
     return (
         <>
-            <Modal className={dropdown} setDropdown={(value) => setDropdown(value)} />
             <header className="header">
-
-
                 <section>
                     <a href="www.google.com.br">Hoje</a>
                     <a href="www.google.com.br">Atrasadas</a>

@@ -1,0 +1,31 @@
+.tasks{
+    margin: 10px 20px;
+    padding: 0px 10px;
+    border: 1px solid;
+    width: 50%;
+    border-radius: 10px;
+}
+
+.tasks h3{
+    width: auto;
+    margin: 10px 0;
+    display: inline-block;
+}
+
+.tasks div{
+    margin: 10px 0;
+    display: inline;
+    float: right;
+}
+
+.tasks img{
+    width: 20px;
+    height: 20px;
+    margin: 0px 5px;
+}
+
+.tasks h5{
+    margin: 10px 0;
+    display: inline;
+    float: right;
+}

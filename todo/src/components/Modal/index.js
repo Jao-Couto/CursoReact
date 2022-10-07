@@ -2,13 +2,11 @@ import React from "react";
 import "./Modal.css";
 import AddTask from "../AddTask";
 
-const Modal = props => {
-    const { className, setDropdown } = props;
+const Modal = ({ className, setDropdown, setTasks }) => {
 
     return (
         <div className={`${className} modal`}>
-
-            <AddTask setDropdown={setDropdown}></AddTask>
+            <AddTask setDropdown={setDropdown} setTasks={(task) => setTasks(task)}></AddTask>
         </div>
     )
 }

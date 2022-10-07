@@ -9,6 +9,8 @@ function AddTask(props) {
     const [data, setData] = useState(new Date().toISOString().split('T')[0]);
 
     const submit = () => {
+        console.log({ titulo, descricao, data });
+        props.setTasks([{ titulo, descricao, data }])
         props.setDropdown("")
     }
 
