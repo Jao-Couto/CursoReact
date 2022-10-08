@@ -1,20 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css'
 
 function Header(props) {
 
     const showDropdown = () => {
         props.setDropdown("show");
-        console.log("show");
         document.body.style.backgroundColor = "rgba(0,0,0,0.5)"
     }
     return (
         <>
             <header className="header">
                 <section>
-                    <a href="www.google.com.br">Hoje</a>
-                    <a href="www.google.com.br">Atrasadas</a>
-                    <a href="www.google.com.br">Próximas</a>
+                    <Link to={'/hoje'}>Hoje</Link>
+                    <Link to={'/atrasadas'}>Atrasadas</Link>
+                    <Link to={'/proximas'}>Próximas</Link>
+                    <Link to={'/executadas'}>Executadas</Link>
                 </section>
 
                 <section>

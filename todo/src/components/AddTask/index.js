@@ -8,13 +8,21 @@ function AddTask(props) {
     const [descricao, setDescricao] = useState('');
     const [data, setData] = useState(new Date().toISOString().split('T')[0]);
 
-    const submit = () => {
-        console.log({ titulo, descricao, data });
-        props.setTasks([{ titulo, descricao, data }])
-        props.setDropdown("")
+    const submit = (event) => {
+        event.preventDefault()
+        props.setTasks({ titulo, descricao, data, executada: false })
+        clearInputs()
+        closeModal()
+    }
+
+    const clearInputs = () => {
+        setTitulo('')
+        setDescricao('')
+        setData(new Date().toISOString().split('T')[0])
     }
 
     const closeModal = () => {
+        clearInputs()
         props.setDropdown("")
         document.body.style.backgroundColor = "white"
     }
@@ -22,7 +30,7 @@ function AddTask(props) {
     return (
         <section className="formulario">
             <form onSubmit={submit}>
-                <button className='closeButton' onClick={closeModal}>Fechar</button>
+                <button type='button' className='closeButton' onClick={closeModal}>Fechar</button>
                 <CampoTexto type="text" label="Título" placeholder="Insira o Título" obrigatorio aoAlterar={(texto) => setTitulo(texto)} valor={titulo}></CampoTexto>
                 <CampoTexto label="Descrição" placeholder="Insira o Descrição" obrigatorio area aoAlterar={(texto) => setDescricao(texto)} valor={descricao}></CampoTexto>
                 <CampoTexto type="date" label="Data" placeholder="Insira o data" obrigatorio aoAlterar={(texto) => setData(texto)} valor={data}></CampoTexto>
