@@ -24,21 +24,57 @@ app.post('/add', async (req, res) => {
         executada
     }
     await Tasks.create(task)
-        .then(() => {
-            res.status(201).json({ status: 'ok' })
+        .then((result) => {
+            return res.status(201).json({ result })
         }).catch((err) => {
-            res.status(500).json({ error: err })
+            return res.status(500).json({ error: err })
         })
 })
 
 app.get('/get', async (req, res) => {
     await Tasks.find()
         .then((result) => {
-            res.status(201).json({ result })
+            return res.status(201).json({ result })
         }).catch((err) => {
-            res.status(500).json({ error: err })
+            return res.status(500).json({ error: err })
         })
-    res.json({ nome: 'ola' })
+})
+
+app.get('/getOne/:titulo', async (req, res) => {
+    const titulo = req.params.titulo
+    await Tasks.findOne({ titulo })
+        .then((result) => {
+            return res.status(201).json({ result })
+        }).catch((err) => {
+            return res.status(500).json({ error: err })
+        })
+})
+
+app.put('/update', async (req, res) => {
+    const { titulo, descricao, data, executada, id } = res.req.body
+    await Tasks.updateOne({ _id: id }, {
+        $set: {
+            titulo,
+            descricao,
+            data,
+            executada
+        }
+    })
+        .then((result) => {
+            return res.status(201).json({ result })
+        }).catch((err) => {
+            return res.status(500).json({ error: err })
+        })
+})
+
+app.delete('/delete/:id', async (req, res) => {
+    const id = req.params.id
+    await Tasks.deleteOne({ _id: id })
+        .then((result) => {
+            return res.status(201).json({ result })
+        }).catch((err) => {
+            return res.status(500).json({ error: err })
+        })
 })
 
 mongoose.connect('mongodb+srv://admin:adminJoaoRafael@expresssecomp2022.o7wdbuy.mongodb.net/?retryWrites=true&w=majority')
