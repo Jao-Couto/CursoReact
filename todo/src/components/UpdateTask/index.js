@@ -12,7 +12,7 @@ function UpdateTask(props) {
     const submit = (event) => {
         event.preventDefault()
         taskService.update({  
-            id: props.id,
+            _id: props.id,
             titulo,
             descricao,
             data
