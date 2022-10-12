@@ -15,7 +15,7 @@ function Header(props) {
                 <section>
                     <Link to={'/hoje'}>Hoje</Link>
                     <Link to={'/atrasadas'}>Atrasadas</Link>
-                    <Link to={'/proximas'}>Próximas</Link>
+                    <Link to={'/futuras'}>Próximas</Link>
                     <Link to={'/executadas'}>Executadas</Link>
                 </section>
 

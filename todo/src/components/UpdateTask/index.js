@@ -11,13 +11,13 @@ function UpdateTask(props) {
 
     const submit = (event) => {
         event.preventDefault()
-        taskService.update({  
+        taskService.update({
             _id: props.id,
             titulo,
             descricao,
             data
-        }).then(result => console.log(result)).
-            catch(error => alert(error))
+        }).then(result => console.log(result))
+            .catch(error => alert(error))
         clearInputs()
         closeModal()
     }

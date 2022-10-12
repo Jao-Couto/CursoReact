@@ -45,17 +45,19 @@ app.get('/get/:type', async (req, res) => {
     let typeRequest;
     const dataHoje = new Date()
     dataHoje.setUTCHours(0, 0, 0, 0)
-    switch (type){
+    switch (type) {
         case "hoje":
             typeRequest = {
                 data: dataHoje,
+                executada: false
             }
             break;
-        case "atrasada":
+        case "atrasadas":
             typeRequest = {
                 data: {
                     $lte: dataHoje,
                 },
+                executada: false
             }
             break;
         case "futuras":
@@ -63,6 +65,7 @@ app.get('/get/:type', async (req, res) => {
                 data: {
                     $gte: dataHoje,
                 },
+                executada: false
             }
             break;
         case "executadas":
@@ -71,7 +74,7 @@ app.get('/get/:type', async (req, res) => {
             }
             break;
         default:
-            return res.status(404).json({"error": "Type not found"})
+            return res.status(404).json({ "error": "Type not found" })
     }
     await Tasks.find(typeRequest)
         .then((result) => {
@@ -93,14 +96,14 @@ app.get('/getOne/:titulo', async (req, res) => {
 })
 
 app.put('/update', async (req, res) => {
-    const { titulo, descricao, data, executada, id } = res.req.body
+    const { titulo, descricao, data, executada, _id } = res.req.body
 
-    await Tasks.updateOne({ _id: id }, {
+    await Tasks.updateOne({ _id: _id }, {
         $set: {
-            ...(titulo != undefined && {titulo}),
-            ...(descricao != undefined && {descricao}),
-            ...(data != undefined && {data}),
-            ...(executada != undefined && {executada})
+            ...(titulo != undefined && { titulo }),
+            ...(descricao != undefined && { descricao }),
+            ...(data != undefined && { data }),
+            ...(executada != undefined && { executada })
         }
     })
         .then((result) => {

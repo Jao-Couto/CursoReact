@@ -1,74 +1,67 @@
 import { useEffect, useState } from "react"
 import "./Tasks.css"
-import {FaRegEdit, FaTrashAlt, FaCheckSquare, FaRegCheckSquare, FaRegSquare} from "react-icons/fa"
+import { FaRegEdit, FaTrashAlt, FaCheckSquare, FaRegSquare } from "react-icons/fa"
 import taskService from "../../services/taskService"
 
-function Tasks({type}) {
+function Tasks({ type, dropdown }) {
     const [tasks, setTasks] = useState([]);
 
+    useEffect(() => {
+        loadTasks()
+    }, [type, dropdown])
+
+    const loadTasks = () => {
+        const copyType = type
+        taskService.getPerType(copyType.toLowerCase())
+            .then((result) => {
+                console.log(result.data.result);
+                setTasks(result.data.result);
+            })
+            .catch((err) => console.log(err))
+    }
+
     const excluirTask = (index) => {
-        const tasksExcluida = tasks.pop(index)
-        setTasks(tasksExcluida)
+        taskService.delete(tasks[index]._id)
+            .then((res) => {
+                loadTasks()
+                console.log(res);
+            })
+            .catch(err => console.log(err))
     }
 
 
     const executarTask = (index) => {
-        taskService.update({
-
-        })
-    }
-
-    useEffect(()=>{
-        taskService.getPerType(type).
-            then((result) => {setTasks(result.data); console.log(result);}).
-            catch((err) => console.log(err))
-        })
-
-    const imprimirTasks = () => {
-        let tasksImpirmir
-
-        
-
-        console.log("exec", tasksImpirmir);
-        return tasksImpirmir.length > 0 && tasksImpirmir.map((item, index) => {
-            console.log("entrou");
-            let dataComparar = new Date(item.data);
-            dataComparar.setDate(dataComparar.getDate() + 1);
-            dataComparar = dataComparar.setHours(0, 0, 0, 0)
-
-            const dataHoje = new Date().setHours(0, 0, 0, 0)
-
-            const ifHoje = dataComparar === dataHoje && hoje;
-            const ifProxima = dataComparar > dataHoje && proximas
-            const ifAtrasada = dataComparar < dataHoje && atrasadas
-
-            if ((((ifHoje) || (ifProxima) || (ifAtrasada)) && !item.executada) || executadas)
-                return <div className="tasks" key={index}>
-
-                    <h3>{item.titulo}</h3>
-                    <div>
-                        
-                        {!executadas ? 
-                            <FaCheckSquare  size={20} onClick={() => { executarTask(index) }}></FaCheckSquare>
-                            : <FaRegSquare size={20}></FaRegSquare> 
-                        }
-                        <FaTrashAlt style={{margin: "0 5px"}} size={20} onClick={() => excluirTask(index)}></FaTrashAlt>  
-                        <FaRegEdit size={20}></FaRegEdit> 
-                    </div>
-
-                    <p>{item.descricao}</p>
-                    <h5>{item.data.split('-').reverse().join('/')}</h5>
-                </div>
-        })
+        const data = tasks[index]
+        data.executada = !data.executada
+        taskService.update(data)
+            .then((res) => {
+                loadTasks()
+                console.log(res);
+            })
+            .catch(err => console.log(err))
     }
 
     return (
         <section style={{ display: "flex", alignItems: 'center', flexDirection: 'column' }}>
-            {hoje && <h1>Hoje</h1>}
-            {atrasadas && <h1>Atrasadas</h1>}
-            {proximas && <h1>Próximas</h1>}
-            {executadas && <h1>Executadas</h1>}
-            {imprimirTasks()}
+            <h1>{type}</h1>
+            {tasks.length > 0 && tasks.map((item, index) => {
+                return <div className="tasks" key={index}>
+
+                    <h3>{item.titulo}</h3>
+                    <div>
+
+                        {type !== "Executadas" ?
+                            <FaCheckSquare size={20} onClick={() => { executarTask(index) }}></FaCheckSquare>
+                            : <FaRegSquare size={20} onClick={() => { executarTask(index) }}></FaRegSquare>
+                        }
+                        <FaTrashAlt style={{ margin: "0 5px" }} size={20} onClick={() => excluirTask(index)}></FaTrashAlt>
+                        <FaRegEdit size={20}></FaRegEdit>
+                    </div>
+
+                    <p>{item.descricao}</p>
+                    <h5>{item.data.split('T')[0].split('-').reverse().join('/')}</h5>
+                </div>
+            })}
         </section>
     )
 }
