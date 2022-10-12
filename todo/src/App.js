@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
 import Modal from './components/Modal';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
@@ -15,10 +16,10 @@ function App() {
             <Header setDropdown={(value) => setDropdown(value)}></Header>
             <Modal className={dropdown} setTasks={(task) => setTasks([...tasks, task])} setDropdown={(value) => setDropdown(value)} />
             <Routes>
-                <Route path="/hoje" element={<Tasks hoje setTasks={(task) => setTasks(task)} tasks={tasks} setTasksExecutadas={(task) => setTasksExecutadas(task)} tasksExecutadas={tasksExecutadas}></Tasks>}></Route>
-                <Route path="/atrasadas" element={<Tasks atrasadas setTasks={(task) => setTasks(task)} tasks={tasks} setTasksExecutadas={(task) => setTasksExecutadas(task)} tasksExecutadas={tasksExecutadas}></Tasks>}></Route>
-                <Route path="/proximas" element={<Tasks proximas setTasks={(task) => setTasks(task)} tasks={tasks} setTasksExecutadas={(task) => setTasksExecutadas(task)} tasksExecutadas={tasksExecutadas}></Tasks>}></Route>
-                <Route path="/executadas" element={<Tasks executadas setTasks={(task) => setTasks(task)} tasks={tasks} setTasksExecutadas={(task) => setTasksExecutadas(task)} tasksExecutadas={tasksExecutadas}></Tasks>}></Route>
+                <Route path="/hoje" element={<Tasks type="hoje"></Tasks>}></Route>
+                <Route path="/atrasadas" element={<Tasks type="atrasadas"></Tasks>}></Route>
+                <Route path="/proximas" element={<Tasks type="proximas"></Tasks>}></Route>
+                <Route path="/executadas" element={<Tasks type="executadas"></Tasks>}></Route>
             </Routes>
         </Router>
     );

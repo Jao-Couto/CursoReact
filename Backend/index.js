@@ -31,7 +31,7 @@ app.post('/add', async (req, res) => {
         })
 })
 
-app.get('/get', async (req, res) => {
+app.get('/getAll', async (req, res) => {
     await Tasks.find()
         .then((result) => {
             return res.status(201).json({ result })
@@ -39,6 +39,48 @@ app.get('/get', async (req, res) => {
             return res.status(500).json({ error: err })
         })
 })
+
+app.get('/get/:type', async (req, res) => {
+    const type = req.params.type
+    let typeRequest;
+    const dataHoje = new Date()
+    dataHoje.setUTCHours(0, 0, 0, 0)
+    switch (type){
+        case "hoje":
+            typeRequest = {
+                data: dataHoje,
+            }
+            break;
+        case "atrasada":
+            typeRequest = {
+                data: {
+                    $lte: dataHoje,
+                },
+            }
+            break;
+        case "futuras":
+            typeRequest = {
+                data: {
+                    $gte: dataHoje,
+                },
+            }
+            break;
+        case "executadas":
+            typeRequest = {
+                executada: true
+            }
+            break;
+        default:
+            return res.status(404).json({"error": "Type not found"})
+    }
+    await Tasks.find(typeRequest)
+        .then((result) => {
+            return res.status(201).json({ result })
+        }).catch((err) => {
+            return res.status(500).json({ error: err })
+        })
+})
+
 
 app.get('/getOne/:titulo', async (req, res) => {
     const titulo = req.params.titulo

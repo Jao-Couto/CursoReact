@@ -1,8 +1,10 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import "./Tasks.css"
+import {FaRegEdit, FaTrashAlt, FaCheckSquare, FaRegCheckSquare, FaRegSquare} from "react-icons/fa"
+import taskService from "../../services/taskService"
 
-function Tasks({ tasks, setTasks, tasksExecutadas, setTasksExecutadas, hoje = false, atrasadas = false, proximas = false, executadas = false }) {
-
+function Tasks({type}) {
+    const [tasks, setTasks] = useState([]);
 
     const excluirTask = (index) => {
         const tasksExcluida = tasks.pop(index)
@@ -16,6 +18,13 @@ function Tasks({ tasks, setTasks, tasksExecutadas, setTasksExecutadas, hoje = fa
         setTasks(tasksExcluida)
     }
 
+    useEffect(()=>{
+        taskService.getPerType(type).
+            then((result) => {setTasks(result.data); console.log(result);}).
+            catch((err) => console.log(err))
+    
+        })
+        
     const imprimirTasks = () => {
         let tasksImpirmir
 
@@ -42,9 +51,13 @@ function Tasks({ tasks, setTasks, tasksExecutadas, setTasksExecutadas, hoje = fa
 
                     <h3>{item.titulo}</h3>
                     <div>
-                        <img src="https://cdn.pixabay.com/photo/2016/02/01/12/20/play-1173495_1280.png" alt="Play" onClick={() => { executarTask(index) }}></img>
-                        <img src="https://cdn.pixabay.com/photo/2014/03/24/13/41/trashcan-293989_1280.png" alt="Lixo" onClick={() => excluirTask(index)}></img>
-                        <img src="https://cdn.pixabay.com/photo/2016/07/26/05/18/pencil-1542024_1280.png" alt="Editar" ></img>
+                        
+                        {!executadas ? 
+                            <FaCheckSquare  size={20} onClick={() => { executarTask(index) }}></FaCheckSquare>
+                            : <FaRegSquare size={20}></FaRegSquare> 
+                        }
+                        <FaTrashAlt style={{margin: "0 5px"}} size={20} onClick={() => excluirTask(index)}></FaTrashAlt>  
+                        <FaRegEdit size={20}></FaRegEdit> 
                     </div>
 
                     <p>{item.descricao}</p>

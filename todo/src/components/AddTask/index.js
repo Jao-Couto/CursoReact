@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import taskService from '../../services/taskService';
 import Botao from '../Botao';
 import CampoTexto from '../CampoTexto';
 import './AddTask.css'
@@ -10,7 +11,13 @@ function AddTask(props) {
 
     const submit = (event) => {
         event.preventDefault()
-        props.setTasks({ titulo, descricao, data, executada: false })
+        taskService.create({  
+            titulo,
+            descricao,
+            data,
+            executada: false
+        }).then(result => console.log(result)).
+            catch(error => alert(error))
         clearInputs()
         closeModal()
     }
