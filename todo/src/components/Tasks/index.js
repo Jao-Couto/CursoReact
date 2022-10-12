@@ -13,25 +13,21 @@ function Tasks({type}) {
 
 
     const executarTask = (index) => {
-        setTasksExecutadas([...tasksExecutadas, tasks[index]])
-        const tasksExcluida = tasks.pop(index)
-        setTasks(tasksExcluida)
+        taskService.update({
+
+        })
     }
 
     useEffect(()=>{
         taskService.getPerType(type).
             then((result) => {setTasks(result.data); console.log(result);}).
             catch((err) => console.log(err))
-    
         })
-        
+
     const imprimirTasks = () => {
         let tasksImpirmir
 
-        if (executadas)
-            tasksImpirmir = tasksExecutadas
-        else
-            tasksImpirmir = tasks
+        
 
         console.log("exec", tasksImpirmir);
         return tasksImpirmir.length > 0 && tasksImpirmir.map((item, index) => {

@@ -94,12 +94,13 @@ app.get('/getOne/:titulo', async (req, res) => {
 
 app.put('/update', async (req, res) => {
     const { titulo, descricao, data, executada, id } = res.req.body
+
     await Tasks.updateOne({ _id: id }, {
         $set: {
-            titulo,
-            descricao,
-            data,
-            executada
+            ...(titulo != undefined && {titulo}),
+            ...(descricao != undefined && {descricao}),
+            ...(data != undefined && {data}),
+            ...(executada != undefined && {executada})
         }
     })
         .then((result) => {
