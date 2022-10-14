@@ -13,9 +13,9 @@ const CampoTexto = (props) => {
                 {props.label}
             </label>
             {props.area ?
-                <textarea rows={5} value={props.valor} onChange={aoDigitado} required={props.obrigatorio} placeholder={props.placeholder} />
+                <textarea className='input' rows={5} value={props.valor} onChange={aoDigitado} required={props.obrigatorio} placeholder={props.placeholder} />
                 :
-                <input type={props.type} value={props.valor} onChange={aoDigitado} required={props.obrigatorio} placeholder={props.placeholder} />
+                <input className='input' type={props.type} value={props.valor} onChange={aoDigitado} required={props.obrigatorio} placeholder={props.placeholder} />
             }
         </div>
     )

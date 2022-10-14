@@ -1,7 +1,8 @@
 import { useState } from "react";
-import Header from "./components/Header";
-import Tasks from "./components/Tasks";
-import Modal from './components/Modal';
+import Navbar from "./widgets/Navbar";
+import Tasks from "./screens/Tasks";
+import Modal from './widgets/Modal';
+import Header from './widgets/Header';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
@@ -10,9 +11,12 @@ function App() {
 
     const [dropdown, setDropdown] = useState("");
 
+    
+
     return (
         <Router>
-            <Header setDropdown={(value) => setDropdown(value)}></Header>
+            <Header setDropdown={(drop) => setDropdown(drop)}></Header>
+            <Navbar></Navbar>
             <Modal className={dropdown} setTasks={(task) => setTasks([...tasks, task])} setDropdown={(value) => setDropdown(value)} />
             <Routes>
                 <Route path="/hoje" element={<Tasks type="Hoje" dropdown={dropdown}></Tasks>}></Route>
