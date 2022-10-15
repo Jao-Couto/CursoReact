@@ -10,7 +10,7 @@ function AddTask({ setShow, task, show }) {
     const [data, setData] = useState(new Date().toISOString().split("T")[0]);
 
     useEffect(() => {
-        if (task != undefined && task != {}) {
+        if (task != undefined && Object.keys(task).length > 0) {
             setTitulo(task.titulo)
             setDescricao(task.descricao)
             setData(task.data.split("T")[0])

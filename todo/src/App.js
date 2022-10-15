@@ -7,7 +7,6 @@ import Header from "./widgets/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-    const [tasks, setTasks] = useState([]);
     const [show, setShow] = useState(false);
 
     const setShowFunc = (bool) => {

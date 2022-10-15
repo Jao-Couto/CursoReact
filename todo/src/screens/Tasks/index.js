@@ -64,7 +64,6 @@ function Tasks({ typeMap }) {
                 task={taskEdit}
             />
             <h1>{typeMap["name"]}</h1>
-            <p>{typeMap["description"]}</p>
             <div className="tasks">
                 {tasks.length > 0 &&
                     tasks.map((item, index) => {
