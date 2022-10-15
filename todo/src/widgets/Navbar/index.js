@@ -4,7 +4,7 @@ import { FaCalendarDay, FaCalendarAlt, FaCalendarTimes, FaCalendarCheck } from "
 
 import "./Navbar.css";
 
-function Navbar(props) {
+function Navbar() {
   return (
     <ul>
       <li>

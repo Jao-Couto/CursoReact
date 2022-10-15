@@ -1,31 +1,71 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./widgets/Navbar";
 import Tasks from "./screens/Tasks";
-import Modal from './widgets/Modal';
-import Header from './widgets/Header';
+import Modal from "./widgets/Modal";
+import Header from "./widgets/Header";
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-    const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState([]);
+  const [show, setShow] = useState(false);
 
-    const [dropdown, setDropdown] = useState("");
+  const setShowFunc = (bool) => {
+    setShow(bool);
+  };
 
-    
+  const hoje = {
+    name: "Hoje",
+    description: "bla",
+    code: "hoje",
+  };
 
-    return (
-        <Router>
-            <Header setDropdown={(drop) => setDropdown(drop)}></Header>
-            <Navbar></Navbar>
-            <Modal className={dropdown} setTasks={(task) => setTasks([...tasks, task])} setDropdown={(value) => setDropdown(value)} />
-            <Routes>
-                <Route path="/hoje" element={<Tasks type="Hoje" dropdown={dropdown}></Tasks>}></Route>
-                <Route path="/atrasadas" element={<Tasks type="Atrasadas" dropdown={dropdown}></Tasks>}></Route>
-                <Route path="/futuras" element={<Tasks type="Futuras" dropdown={dropdown}></Tasks>}></Route>
-                <Route path="/executadas" element={<Tasks type="Executadas"></Tasks>}></Route>
-            </Routes>
-        </Router>
-    );
+  const atrasadas = {
+    name: "Atrasadas",
+    description: "bla",
+    code: "atrasadas",
+  };
+
+  const futuras = {
+    name: "Futuras",
+    description: "bla",
+    code: "futuras",
+  };
+
+  const executadas = {
+    name: "Executadas",
+    description: "bla",
+    code: "executadas",
+  };
+
+  return (
+    <Router>
+      <Header setShow={setShowFunc}></Header>
+      <Modal
+        show={show}
+        setShow={setShowFunc}
+        setTasks={(task) => setTasks([...tasks, task])}
+      />
+      <div className="sidebar">
+        <Navbar></Navbar>
+        <Routes>
+          <Route path="/hoje" element={<Tasks typeMap={hoje}></Tasks>}></Route>
+          <Route
+            path="/atrasadas"
+            element={<Tasks typeMap={atrasadas}></Tasks>}
+          ></Route>
+          <Route
+            path="/futuras"
+            element={<Tasks typeMap={futuras}></Tasks>}
+          ></Route>
+          <Route
+            path="/executadas"
+            element={<Tasks typeMap={executadas}></Tasks>}
+          ></Route>
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
 export default App;

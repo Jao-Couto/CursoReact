@@ -32,8 +32,7 @@ function AddTask(props) {
 
   const closeModal = () => {
     clearInputs();
-    props.setDropdown("");
-    document.body.style.backgroundColor = "white";
+    props.setShow(false);
   };
 
   return (

@@ -6,6 +6,11 @@
     background-color: #a3a3a3;
     border-radius: 3px;
     box-shadow: 8px 8px 16px rgba(0,0,0, 0.08);
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
 }
 
 .formulario form {
@@ -46,4 +51,10 @@
     border: none;
     border-radius: 3px;
     background-color:#afafaf;
+}
+
+@media only screen and (max-width: 800px) {
+    .formulario{
+        width: 100%;
+    }
 }

@@ -3,20 +3,20 @@ import "./Modal.css";
 import AddTask from "../AddTask";
 import UpdateTask from "../UpdateTask";
 
-const Modal = ({ className, setDropdown, setTasks, isUpdate }) => {
+const Modal = ({ show, setShow, setTasks, isUpdate }) => {
   return !isUpdate ? (
-    <div className={`${className} modal`}>
+    <div style={{display: (show) ? "block" : "none"}} className={"modal"}>
       <AddTask
-        setDropdown={setDropdown}
+        setShow={setShow}
         setTasks={(task) => setTasks(task)}
       ></AddTask>
     </div>
   ) : (
-    <div className={`${className} modal`}>
+    <div className={"modal"}>
       <UpdateTask
-        setDropdown={setDropdown}
+        setShow={setShow}
         setTasks={(task) => setTasks(task)}
-      ></UpdateTask>
+      />
     </div>
   );
 };

@@ -1,12 +1,14 @@
 ul {
+  
   list-style-type: none;
   margin: 0;
+  margin-top: 80px;
   padding: 0;
   padding-top: 30px;
-  width: 15%;
-  min-width: 240px;
+  width: 240px;
   background-color: #303030;
   position: fixed;
+  top: 1;
   height: 100%;
   overflow: auto;
   /*
@@ -35,23 +37,4 @@ li a.active {
 
 li a:hover:not(.active) {
   background-color: #555;
-}
-
-.icons{
-    height:15px;
-    width:15px;
-    padding-right: 10px;
-}
-
-
-.header img:active {
-  background-color: green;
-}
-
-.header a {
-  text-decoration: none;
-  margin: 0 10px;
-  font-size: 20px;
-  color: #fff;
-  font-weight: bolder;
 }
