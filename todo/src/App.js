@@ -7,65 +7,64 @@ import Header from "./widgets/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
-  const [show, setShow] = useState(false);
+    const [tasks, setTasks] = useState([]);
+    const [show, setShow] = useState(false);
 
-  const setShowFunc = (bool) => {
-    setShow(bool);
-  };
+    const setShowFunc = (bool) => {
+        setShow(bool);
+    };
 
-  const hoje = {
-    name: "Hoje",
-    description: "bla",
-    code: "hoje",
-  };
+    const hoje = {
+        name: "Hoje",
+        description: "bla",
+        code: "hoje",
+    };
 
-  const atrasadas = {
-    name: "Atrasadas",
-    description: "bla",
-    code: "atrasadas",
-  };
+    const atrasadas = {
+        name: "Atrasadas",
+        description: "bla",
+        code: "atrasadas",
+    };
 
-  const futuras = {
-    name: "Futuras",
-    description: "bla",
-    code: "futuras",
-  };
+    const futuras = {
+        name: "Futuras",
+        description: "bla",
+        code: "futuras",
+    };
 
-  const executadas = {
-    name: "Executadas",
-    description: "bla",
-    code: "executadas",
-  };
+    const executadas = {
+        name: "Executadas",
+        description: "bla",
+        code: "executadas",
+    };
 
-  return (
-    <Router>
-      <Header setShow={setShowFunc}></Header>
-      <Modal
-        show={show}
-        setShow={setShowFunc}
-        setTasks={(task) => setTasks([...tasks, task])}
-      />
-      <div className="sidebar">
-        <Navbar></Navbar>
-        <Routes>
-          <Route path="/hoje" element={<Tasks typeMap={hoje}></Tasks>}></Route>
-          <Route
-            path="/atrasadas"
-            element={<Tasks typeMap={atrasadas}></Tasks>}
-          ></Route>
-          <Route
-            path="/futuras"
-            element={<Tasks typeMap={futuras}></Tasks>}
-          ></Route>
-          <Route
-            path="/executadas"
-            element={<Tasks typeMap={executadas}></Tasks>}
-          ></Route>
-        </Routes>
-      </div>
-    </Router>
-  );
+    return (
+        <Router>
+            <Header setShow={setShowFunc}></Header>
+            <Modal
+                show={show}
+                setShow={setShowFunc}
+            />
+            <div className="sidebar">
+                <Navbar></Navbar>
+                <Routes>
+                    <Route path="/hoje" element={<Tasks typeMap={hoje}></Tasks>}></Route>
+                    <Route
+                        path="/atrasadas"
+                        element={<Tasks typeMap={atrasadas}></Tasks>}
+                    ></Route>
+                    <Route
+                        path="/futuras"
+                        element={<Tasks typeMap={futuras}></Tasks>}
+                    ></Route>
+                    <Route
+                        path="/executadas"
+                        element={<Tasks typeMap={executadas}></Tasks>}
+                    ></Route>
+                </Routes>
+            </div>
+        </Router>
+    );
 }
 
 export default App;

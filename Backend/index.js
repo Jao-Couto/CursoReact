@@ -55,7 +55,7 @@ app.get('/get/:type', async (req, res) => {
         case "atrasadas":
             typeRequest = {
                 data: {
-                    $lte: dataHoje,
+                    $lt: dataHoje,
                 },
                 executada: false
             }
@@ -63,7 +63,7 @@ app.get('/get/:type', async (req, res) => {
         case "futuras":
             typeRequest = {
                 data: {
-                    $gte: dataHoje,
+                    $gt: dataHoje,
                 },
                 executada: false
             }
@@ -76,7 +76,7 @@ app.get('/get/:type', async (req, res) => {
         default:
             return res.status(404).json({ "error": "Type not found" })
     }
-    await Tasks.find(typeRequest)
+    await Tasks.find(typeRequest).sort({ data: 'asc' })
         .then((result) => {
             return res.status(201).json({ result })
         }).catch((err) => {
