@@ -5,6 +5,7 @@ import {
     FaTrashAlt,
     FaCheckSquare,
     FaRegSquare,
+    FaTrashRestore
 } from "react-icons/fa";
 import taskService from "../../services/taskService";
 import Modal from "../../widgets/Modal";
@@ -30,13 +31,31 @@ function Tasks({ typeMap }) {
 
     const excluirTask = (index) => {
         taskService
-            .delete(tasks[index]._id)
+            .deleteLogico({ id: tasks[index]._id, deletada: true })
             .then((res) => {
                 loadTasks();
                 console.log(res);
             })
             .catch((err) => console.log(err));
+
+        // taskService
+        //     .delete(tasks[index]._id)
+        //     .then((res) => {
+        //         loadTasks();
+        //         console.log(res);
+        //     })
+        //     .catch((err) => console.log(err));
     };
+
+    const restaurarTask = (index) => {
+        taskService
+            .deleteLogico({ id: tasks[index]._id, deletada: false })
+            .then((res) => {
+                loadTasks();
+                console.log(res);
+            })
+            .catch((err) => console.log(err));
+    }
 
     const executarTask = (index) => {
         const data = tasks[index];
@@ -78,29 +97,42 @@ function Tasks({ typeMap }) {
                                         {item.data.split("T")[0].split("-").reverse().join("/")}
                                     </p>
                                     <div className="icons">
-                                        {typeMap["code"] !== "executadas" ? (
-                                            <FaCheckSquare
-                                                size={20}
-                                                style={{ cursor: "pointer" }}
-                                                onClick={() => {
-                                                    executarTask(index);
-                                                }}
-                                            />
-                                        ) : (
-                                            <FaRegSquare
-                                                size={20}
-                                                style={{ cursor: "pointer" }}
-                                                onClick={() => {
-                                                    executarTask(index);
-                                                }}
-                                            />
-                                        )}
-                                        <FaTrashAlt
-                                            style={{ margin: "0 5px", cursor: "pointer" }}
+                                        {console.log(typeMap["code"])}
+                                        {typeMap["code"] == "excluidas" ? <FaTrashRestore
                                             size={20}
-                                            onClick={() => excluirTask(index)}
+                                            style={{ cursor: "pointer" }}
+                                            onClick={() => {
+                                                restaurarTask(index);
+                                            }}
                                         />
-                                        <FaRegEdit style={{ cursor: "pointer" }} size={20} onClick={() => editTask(index)}></FaRegEdit>
+                                            :
+                                            <>
+                                                {typeMap["code"] !== "executadas" ? (
+                                                    <FaCheckSquare
+                                                        size={20}
+                                                        style={{ cursor: "pointer" }}
+                                                        onClick={() => {
+                                                            executarTask(index);
+                                                        }}
+                                                    />
+                                                ) : (
+                                                    <FaRegSquare
+                                                        size={20}
+                                                        style={{ cursor: "pointer" }}
+                                                        onClick={() => {
+                                                            executarTask(index);
+                                                        }}
+                                                    />
+                                                )}
+
+                                                <FaTrashAlt
+                                                    style={{ margin: "0 5px", cursor: "pointer" }}
+                                                    size={20}
+                                                    onClick={() => excluirTask(index)}
+                                                />
+                                                <FaRegEdit style={{ cursor: "pointer" }} size={20} onClick={() => editTask(index)}></FaRegEdit>
+                                            </>}
+
                                     </div>
                                 </div>
                             </div>
