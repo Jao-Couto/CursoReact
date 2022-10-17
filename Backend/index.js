@@ -49,8 +49,7 @@ app.get('/get/:type', async (req, res) => {
         case "hoje":
             typeRequest = {
                 data: dataHoje,
-                executada: false,
-                excluida: false
+                executada: false
             }
             break;
         case "atrasadas":
@@ -58,8 +57,7 @@ app.get('/get/:type', async (req, res) => {
                 data: {
                     $lt: dataHoje,
                 },
-                executada: false,
-                excluida: false
+                executada: false
             }
             break;
         case "futuras":
@@ -67,19 +65,12 @@ app.get('/get/:type', async (req, res) => {
                 data: {
                     $gt: dataHoje,
                 },
-                executada: false,
-                excluida: false
+                executada: false
             }
             break;
         case "executadas":
             typeRequest = {
-                executada: true,
-                excluida: false
-            }
-            break;
-        case "excluidas":
-            typeRequest = {
-                excluida: true
+                executada: true
             }
             break;
         default:
@@ -125,21 +116,6 @@ app.put('/update', async (req, res) => {
 app.delete('/delete/:id', async (req, res) => {
     const id = req.params.id
     await Tasks.deleteOne({ _id: id })
-        .then((result) => {
-            return res.status(201).json({ result })
-        }).catch((err) => {
-            return res.status(500).json({ error: err })
-        })
-})
-
-app.put('/deleteLogico', async (req, res) => {
-    const { id, deletada } = res.req.body
-    await Tasks.updateOne({ _id: id },
-        {
-            $set: {
-                excluida: deletada
-            }
-        })
         .then((result) => {
             return res.status(201).json({ result })
         }).catch((err) => {

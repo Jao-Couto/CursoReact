@@ -15,27 +15,26 @@ function App() {
 
     const hoje = {
         name: "Hoje",
+        description: "bla",
         code: "hoje",
     };
 
     const atrasadas = {
         name: "Atrasadas",
+        description: "bla",
         code: "atrasadas",
     };
 
     const futuras = {
         name: "Futuras",
+        description: "bla",
         code: "futuras",
     };
 
     const executadas = {
         name: "Executadas",
+        description: "bla",
         code: "executadas",
-    };
-
-    const excluidas = {
-        name: "Excluidas",
-        code: "excluidas",
     };
 
     return (
@@ -60,10 +59,6 @@ function App() {
                     <Route
                         path="/executadas"
                         element={<Tasks typeMap={executadas}></Tasks>}
-                    ></Route>
-                    <Route
-                        path="/excluidas"
-                        element={<Tasks typeMap={excluidas}></Tasks>}
                     ></Route>
                 </Routes>
             </div>

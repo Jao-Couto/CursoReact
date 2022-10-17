@@ -2,7 +2,7 @@ import axios from "axios"
 
 const baseUrl = "http://localhost:9000/"
 class TaskService {
-
+    
 
     async create(data) {
         return axios({
@@ -36,10 +36,10 @@ class TaskService {
             return Promise.reject(err)
         })
     }
-
+    
     async getPerType(type) {
         return axios({
-            url: baseUrl + "get/" + type,
+            url: baseUrl + "get/"+type,
             method: "GET",
             timeout: 1000,
             headers: {
@@ -55,7 +55,7 @@ class TaskService {
 
     async getOne(data) {
         return axios({
-            url: baseUrl + "getOne/" + data,
+            url: baseUrl + "getOne/"+ data,
             method: "GET",
             timeout: 1000,
             headers: {
@@ -88,25 +88,8 @@ class TaskService {
 
     async delete(data) {
         return axios({
-            url: baseUrl + "delete/" + data,
+            url: baseUrl + "delete/"+data,
             method: "DELETE",
-            timeout: 1000,
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': '/',
-            }
-        }).then((res) => {
-            return Promise.resolve(res)
-        }).catch((err) => {
-            return Promise.reject(err)
-        })
-    }
-
-    async deleteLogico(data) {
-        return axios({
-            url: baseUrl + "deleteLogico",
-            method: "PUT",
-            data: data,
             timeout: 1000,
             headers: {
                 'Content-Type': 'application/json',

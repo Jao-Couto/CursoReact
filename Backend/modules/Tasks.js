@@ -4,8 +4,7 @@ const Tasks = mongoose.model('Task', {
     titulo: String,
     descricao: String,
     data: Date,
-    executada: Boolean,
-    excluida: { type: Boolean, default: false }
+    executada: Boolean
 })
 
 module.exports = Tasks
