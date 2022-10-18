@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import taskService from "../../services/taskService";
 import Botao from "../../components/Botao";
 import CampoTexto from "../../components/CampoTexto";
-import "../ModalTasks.css";
+import "./SetTask.css";
 
-function AddTask({ setShow, task, show }) {
+function SetTask({ setShow, task, show }) {
     const [titulo, setTitulo] = useState("");
     const [descricao, setDescricao] = useState("");
     const [data, setData] = useState(new Date().toISOString().split("T")[0]);
 
     useEffect(() => {
-        if (task != undefined && Object.keys(task).length > 0) {
+        if (task !== undefined && Object.keys(task).length > 0) {
             setTitulo(task.titulo)
             setDescricao(task.descricao)
             setData(task.data.split("T")[0])
@@ -19,7 +19,7 @@ function AddTask({ setShow, task, show }) {
 
     const submit = (event) => {
         event.preventDefault();
-        if (task != undefined && task != {}) {
+        if (task !== undefined && task !== {}) {
             taskService.update({
                 _id: task._id,
                 titulo,
@@ -58,7 +58,7 @@ function AddTask({ setShow, task, show }) {
         <section className="formulario">
 
             <form onSubmit={submit}>
-                {task != undefined && task != {} && <h2 style={{ alignSelf: "center" }}>Atualizar Tarefa</h2> || <h2 style={{ alignSelf: "center" }}>Adicionar Tarefa</h2>}
+                {(task !== undefined && task !== {} && <h2 style={{ alignSelf: "center" }}>Atualizar Tarefa</h2>) || <h2 style={{ alignSelf: "center" }}>Adicionar Tarefa</h2>}
 
 
                 <CampoTexto
@@ -86,7 +86,7 @@ function AddTask({ setShow, task, show }) {
                     valor={data}
                 ></CampoTexto>
                 <div className="buttons">
-                    {task != undefined && task != {} && <Botao>Atualizar Tarefa</Botao> || <Botao>Criar Tarefa</Botao>}
+                    {(task !== undefined && task !== {} && <Botao>Atualizar Tarefa</Botao>) || <Botao>Criar Tarefa</Botao>}
 
                     <button type="button" className="cancelButton" onClick={closeModal}>
                         Fechar
@@ -97,4 +97,4 @@ function AddTask({ setShow, task, show }) {
     );
 }
 
-export default AddTask;
+export default SetTask;

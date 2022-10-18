@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "./widgets/Navbar";
 import Tasks from "./screens/Tasks";
 import Modal from "./widgets/Modal";
@@ -50,16 +50,16 @@ function App() {
                     <Route path="/hoje" element={<Tasks typeMap={hoje}></Tasks>}></Route>
                     <Route
                         path="/atrasadas"
-                        element={<Tasks typeMap={atrasadas}></Tasks>}
-                    ></Route>
+                        element={<Tasks typeMap={atrasadas} />}
+                    />
                     <Route
                         path="/futuras"
-                        element={<Tasks typeMap={futuras}></Tasks>}
-                    ></Route>
+                        element={<Tasks typeMap={futuras} />}
+                    />
                     <Route
                         path="/executadas"
-                        element={<Tasks typeMap={executadas}></Tasks>}
-                    ></Route>
+                        element={<Tasks typeMap={executadas} />}
+                    />
                 </Routes>
             </div>
         </Router>

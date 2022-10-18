@@ -11,6 +11,8 @@
     overflow: hidden;
     background-color: #303030;
     color: white;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.341);
+    z-index: 1;
 }
 
 .header > *{

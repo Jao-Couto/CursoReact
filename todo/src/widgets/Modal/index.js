@@ -1,14 +1,14 @@
 import React from "react";
 import "./Modal.css";
-import AddTask from "../AddTask";
+import SetTask from "../SetTask";
 
 const Modal = ({ show, setShow, task }) => {
     return <div style={{ display: (show) ? "flex" : "none" }} className={"modal"}>
-        <AddTask
+        <SetTask
             show={show}
             setShow={setShow}
             task={task}
-        ></AddTask>
+        />
     </div>
 
 };
