@@ -15,7 +15,10 @@ function Tasks({ typeMap }) {
     const [taskEdit, setTaskEdit] = useState({});
 
     useEffect(() => {
-        loadTasks();
+        setTimeout(() => {
+            loadTasks();
+        }, 500)
+
     }, [typeMap, show]);
 
     const loadTasks = () => {

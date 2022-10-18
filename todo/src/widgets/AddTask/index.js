@@ -36,7 +36,7 @@ function AddTask({ setShow, task, show }) {
                     data,
                     executada: false,
                 })
-                .then((result) => console.log(result))
+                .then((result) => console.log('criou', result))
                 .catch((error) => alert(error));
         }
         clearInputs();
@@ -58,7 +58,9 @@ function AddTask({ setShow, task, show }) {
         <section className="formulario">
 
             <form onSubmit={submit}>
-                <h2 style={{ alignSelf: "center" }}>Adicionar Tarefa</h2>
+                {task != undefined && task != {} && <h2 style={{ alignSelf: "center" }}>Atualizar Tarefa</h2> || <h2 style={{ alignSelf: "center" }}>Adicionar Tarefa</h2>}
+
+
                 <CampoTexto
                     type="text"
                     label="Título"
